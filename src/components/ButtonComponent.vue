@@ -1,11 +1,12 @@
 <template>
-    <button :class="classe" class="btn attack">{{ nome }}</button>
+    <button @click="funcao" :class="classe" class="btn">{{ nome }}</button>
 </template>
 
 <script>
 export default {
     //props: ['nome', 'classe'],
 	props: {
+		funcao: Function,
 		nome: {
 			type: String,
 			default: 'Botão',
@@ -15,7 +16,7 @@ export default {
 			type: String,
 			default: ' ',
 			required: true
-		},
+		}
 	}
 }
 </script>
@@ -32,7 +33,7 @@ export default {
 		border: 0px solid white
 	}
 
-	.new-game {
+	.new_game {
 		background-color: blue;
 	}
 	.attack {

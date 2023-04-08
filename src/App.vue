@@ -16,13 +16,15 @@
 
 		<div class="panel buttons">
 			<template v-if="running">
-				<button @click="attack" class="btn attack">Ataque</button>
-				<button @click="attack(true)" class="btn special-attack">Ataque Especial</button>
-				<button @click="healAndHurt" class="btn heal">Curar</button>
-				<button @click="running = false" class="btn give-up">Desistir</button>
+				<ButtonComponent :funcao = 'attack' classe="attack" nome="Ataque" />
+				<ButtonComponent :funcao = 'attackSpecial' classe="special-attack" nome="Ataque Especial" />
+				<ButtonComponent :funcao = 'healAndHurt' classe="heal" nome="Curar" />
+				<ButtonComponent :funcao = "giveUp" classe="give-up" nome="Desistir" />
 			</template>
 
-			<button v-else @click="startGame" class="btn new-game">Novo Jogo</button>
+			<template v-else >
+				<ButtonComponent :funcao = 'startGame' classe="new_game" nome="Novo Jogo" />
+			</template>
 
 		</div>
 
@@ -32,14 +34,14 @@
 <script>
 
 import PanelComponent from './components/PanelComponent.vue'
-//import ButtonComponent from './components/ButtonComponent.vue'
+import ButtonComponent from './components/ButtonComponent.vue'
 import VencedorComponents from './components/VencedorComponents.vue'
 
 export default {
 	name: 'App',
 	components: {
 		PanelComponent,
-		//ButtonComponent,
+		ButtonComponent,
 		VencedorComponents
 	},
 	data() {
@@ -61,9 +63,18 @@ export default {
 			this.playerLife = 100;
 			this.monsterLife = 100;
 		},
-		attack(special) {
-			this.hurt('playerLife', 7, 12, special)
-			this.hurt('monsterLife', 5, 10, special)
+		giveUp() {
+			this.running = false;
+			this.playerLife = 100;
+			this.monsterLife = 100;
+		},
+		attack() {
+			this.hurt('playerLife', 7, 12, false)
+			this.hurt('monsterLife', 5, 10, false)
+		},
+		attackSpecial() {
+			this.hurt('playerLife', 7, 12, true)
+			this.hurt('monsterLife', 5, 10, true)
 		},
 		hurt(atr, min, max, special) {
 			const plus = special ? 5 : 0
@@ -160,33 +171,6 @@ export default {
 	.buttons {
 		display: flex;
 		justify-content: center
-	}
-
-	.btn {
-		padding: 5px 10px;
-		margin: 0px 10px;
-		border-radius: 5px;
-		text-transform: uppercase;
-		font-size: 1.1rem;
-		color: white;
-		border: 0px solid white
-	}
-
-	.new-game {
-		background-color: blue;
-	}
-	.attack {
-		background-color: red;
-	}
-	.special-attack {
-		background-color: yellow;
-		color: black
-	}
-	.heal {
-		background-color: green;
-	}
-	.give-up {
-		background-color: grey;
 	}
 
 </style>
