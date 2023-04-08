@@ -13,7 +13,19 @@
 
 <script>
 export default {
-    props: ['title', 'life']
+    //props: ['title', 'life']
+    props: {
+        title: {
+            type: String,
+            default: 'sem nome',
+            required: true
+        },
+        life: {
+            type: Number,
+            default: 100,
+            required: true
+        }
+    }
 }
 </script>
 

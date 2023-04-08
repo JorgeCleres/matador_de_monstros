@@ -4,7 +4,19 @@
 
 <script>
 export default {
-    props: ['nome', 'classe'],
+    //props: ['nome', 'classe'],
+	props: {
+		nome: {
+			type: String,
+			default: 'Botão',
+			required: true
+		},
+		classe: {
+			type: String,
+			default: ' ',
+			required: true
+		},
+	}
 }
 </script>
 
