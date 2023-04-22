@@ -1,13 +1,21 @@
 <template>
 	<div id="app">
 		<div class="panel scores">
-			<PanelComponent 
-				title =  'Jogador'
-				:life = playerLife />
+			<Transition 
+				enter-active-class="animated animate__rubberBand"
+				leave-active-class="animated animate__hinge" mode="out-in">
+				<PanelComponent v-if="playerLife > 0"
+					title =  'Jogador'
+					:life = playerLife />
+			</Transition>
 			
-			<PanelComponent 
-				title =  'Monstro'
-				:life = monsterLife />
+			<Transition 
+				enter-active-class="animated animate__rubberBand"
+				leave-active-class="animated animate__hinge" mode="out-in">
+				<PanelComponent v-if="monsterLife > 0"
+					title =  'Monstro'
+					:life = monsterLife />
+			</Transition>
 		</div>
 
 		<VencedorComponents 
